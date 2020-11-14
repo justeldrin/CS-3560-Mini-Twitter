@@ -8,7 +8,20 @@ public class userTotalVisitor implements EntryVisitor{
 	}
 	
 	@Override
-	public int visit(UserGroup user) {
-		return 0;
+	public int visit(UserGroup userGroup) {
+		int counter = 0;
+		for(Entry entry: userGroup.getList())
+		{
+			if (entry instanceof User)
+			{
+				counter++;
+			}
+			else if (entry instanceof UserGroup)
+			{
+				counter += visit((UserGroup) entry);
+			}
+		}
+		
+		return counter;
 	}
 }

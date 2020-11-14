@@ -47,6 +47,11 @@ public class UserGroup extends Entry{
 		}
 		return output;
 	}
+	
+	public List<Entry> getList()
+	{
+		return userList;
+	}
 
 	@Override
 	public int accept(EntryVisitor visitor) {

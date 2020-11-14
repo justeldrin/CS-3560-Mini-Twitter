@@ -49,7 +49,18 @@ public class Admin {
 			}
 			else if(tempEntry instanceof UserGroup)
 			{
-				output = (UserGroup) ((UserGroup) tempEntry).getEntry(ID);
+				for(Entry entry: ((UserGroup) tempEntry).getList())
+				{
+					if(entry.getID() == ID)
+					{
+						output = entry;
+						break;
+					}
+					else if(entry instanceof UserGroup)
+					{
+						output = ((UserGroup) entry).getEntry(ID);
+					}
+				}
 			}
 		}
 		return output;
