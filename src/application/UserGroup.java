@@ -3,32 +3,31 @@ import java.util.*;
 
 public class UserGroup extends Entry{
 
-	
 	private List<Entry> userList = new ArrayList<Entry>();
 	
-	public UserGroup()
+	protected UserGroup()
 	{
 		ID = generateID();
 		entryName = "Cool People";
 	}
 	
-	public UserGroup(String name)
+	protected UserGroup(String name)
 	{
 		ID = generateID();
 		entryName = name;
 	}
 	
-	public void addUser(User inputUser)
+	protected void addUser(User inputUser)
 	{
 		userList.add(inputUser);
 	}
 	
-	public void addGroup(UserGroup inputGroup)
+	protected void addGroup(UserGroup inputGroup)
 	{
 		userList.add(inputGroup);
 	}
 	
-	public Entry getEntry(int inputID)
+	protected Entry getEntry(int inputID)
 	{
 		Entry output = null;
 		Iterator<Entry> itr = userList.iterator();
@@ -53,6 +52,7 @@ public class UserGroup extends Entry{
 		return userList;
 	}
 
+	//Visitor Pattern accepts any EntryVisitor
 	@Override
 	public int accept(EntryVisitor visitor) {
 		return visitor.visit(this);

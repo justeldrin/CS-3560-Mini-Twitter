@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+//Prompt user to input name, returns and outputs given name for entryName
 public class NamePrompt {
 
 	private static String output;

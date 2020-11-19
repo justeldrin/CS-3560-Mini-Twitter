@@ -7,37 +7,38 @@ import javafx.collections.ObservableList;
 
 public class User extends Subject implements Observer {
 	
-	
-	
 	private String currentTweet = "";
 	private UserPanelUI userPanel = new UserPanelUI();	
+	//User Tweet Collection collects user's own tweets
 	private List<String> userTweetcollection = new ArrayList<String>();
+	//Current following used to update userView on open
 	private ObservableList<User> currentFollowing = FXCollections.observableArrayList();
 	private ObservableList<String> tweetFeed = FXCollections.observableArrayList();
 	
 	
 	//Constructors
 	//Default Constructor
-	public User()
+	protected User()
 	{
 		ID = generateID();
 		entryName = "Average Joe";
 	}
 	
-	public User(String name)
+	protected User(String name)
 	{
 		ID = generateID();
 		entryName = name;
 	}
 	
-	public User(User user)
+	protected User(User user)
 	{
 		this.ID = user.getID();
 		this.entryName = user.getName();
-		
 	}
+	//End Constructors
 	
-	public void makeTweet(String tweet)
+	//Takes in tweet String then updates observers
+	protected void makeTweet(String tweet)
 	{
 		currentTweet = tweet;
 		tweetFeed.add(this + ": " + currentTweet);
@@ -45,17 +46,20 @@ public class User extends Subject implements Observer {
 		notifyObservers(this);
 	}
 	
-	public void addFollowing(User user)
+	//Adds user to currentFollowing
+	protected void addFollowing(User user)
 	{
 		currentFollowing.add(user);
 	}
 	
+	//Observer Pattern update
 	@Override
 	public void update(User user) 
 	{
 		this.tweetFeed.add(user + ": " + user.getCurrentTweet());
 	}
 	
+	///Visitor pattern accepts any EntryVisitor
 	@Override
 	public int accept(EntryVisitor visitor) {
 		return visitor.visit(this);

@@ -1,5 +1,6 @@
 package application;
 
+//Positive Percent Visitor, visits each user, checks if there are positive words within each message and calculates percentage based on user's messages
 public class positivePercentVisitor implements EntryVisitor{
 
 	private String[] positiveWords = new String[] {"cool", "nice", "excellent"};

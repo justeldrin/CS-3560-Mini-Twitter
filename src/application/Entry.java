@@ -2,11 +2,13 @@ package application;
 
 import java.util.Random;
 
+//Class that encompasses user and UserGroup, Composite Pattern
 public abstract class Entry {
 	int ID;
 	String entryName;
 	
-	public int generateID()
+	//Generate random ID method
+	protected int generateID()
 	{
 		String tempID = "";
 		Random ran = new Random();
@@ -19,6 +21,7 @@ public abstract class Entry {
 		return Integer.parseInt(tempID);
 	}
 	
+	//Hashset Methods to ensure no duplicate ID's
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -41,7 +44,8 @@ public abstract class Entry {
 		return true;
 	}
 	
-	public abstract int accept(EntryVisitor visitor);
+	//Accept method for both user and userGroup
+	protected abstract int accept(EntryVisitor visitor);
 
 	public int getID()
 	{

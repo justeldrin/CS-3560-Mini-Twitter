@@ -2,6 +2,7 @@ package application;
 
 import java.util.*;
 
+//Observer Pattern subject
 public abstract class Subject extends Entry{
 
 	private List<Observer> observers = new ArrayList<Observer>();

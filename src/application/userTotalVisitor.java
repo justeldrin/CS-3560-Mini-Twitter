@@ -1,5 +1,6 @@
 package application;
 
+//User Total Visitor returns 1 if user, iterates through userGroup and returns 1 for every user
 public class userTotalVisitor implements EntryVisitor{
 
 	@Override

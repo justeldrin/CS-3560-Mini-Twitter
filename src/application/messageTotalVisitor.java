@@ -1,5 +1,6 @@
 package application;
 
+//Message Total Visitor, returns user's tweet collection size and iterates through userGroup if necessary
 public class messageTotalVisitor implements EntryVisitor{
 
 	@Override

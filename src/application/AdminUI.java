@@ -14,8 +14,10 @@ import javafx.stage.Stage;
 
 public class AdminUI extends Application {
 	
+	//Current entry keeps track of which entry is selected in tree
 	private TreeItem<Entry> currentEntry;
 	
+	//Start method starts the Twitter UI
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -54,9 +56,9 @@ public class AdminUI extends Application {
 			VBox botCollectiontextA = new VBox(userTotalBtn, messageTotalBtn);
 			VBox botCollectiontextB = new VBox(groupTotalBtn, positiveBtn);
 			HBox botCollection = new HBox(botCollectiontextA, botCollectiontextB);
-						
 			VBox uiCollection = new VBox(20, topCollection, midCollection, botCollection);
 			
+			//Make display tree for AdminUI
 			TreeItem<Entry> treeRoot = new TreeItem<>();
 			treeRoot.setExpanded(true);
 			currentEntry = treeRoot;
@@ -78,7 +80,7 @@ public class AdminUI extends Application {
 			primaryStage.show();
 			
 			//UI LAYOUT END
-			
+			//Listens to tree whenever there is a new entry selected, changes entry ID and group ID
 			treeCollection.getSelectionModel().selectedItemProperty()
 				.addListener((v, oldValue, newValue) -> {
 
@@ -102,6 +104,7 @@ public class AdminUI extends Application {
 					}
 			});
 			
+			//Calls userTotal visitor and displays userTotal
 			userTotalBtn.setOnAction(e ->{
 				int counter = 0;
 				for(Entry entry: Admin.getInstance().getEntryList())
@@ -111,6 +114,7 @@ public class AdminUI extends Application {
 				infoText.setText("Number of Users: " + counter);
 			});
 			
+			//Calls messageTotal visitor and displays total messages
 			messageTotalBtn.setOnAction(e ->{
 				int counter = 0;
 				for(Entry entry: Admin.getInstance().getEntryList())
@@ -119,7 +123,8 @@ public class AdminUI extends Application {
 				}
 				infoText.setText("Number of Tweets: " + counter);
 			});
-						
+			
+			//Calls groupTotal visitor and displays total groups
 			groupTotalBtn.setOnAction(e ->{
 				int counter = 0;
 				for(Entry entry: Admin.getInstance().getEntryList())
@@ -129,6 +134,7 @@ public class AdminUI extends Application {
 				infoText.setText("Number of Groups: " + counter);
 			});
 			
+			//Calls positivePercent visitor and displays % of positive messages
 			positiveBtn.setOnAction(e ->{
 				double counter = 0;
 				for(Entry entry: Admin.getInstance().getEntryList())
@@ -143,7 +149,7 @@ public class AdminUI extends Application {
 				infoText.setText("Percentage of Positive Messages: " + Math.round(counter/messageTotal*100) + "%");
 			});
 			
-			
+			//Adds user, uses currentEntry logic to place user in correct place depending on if a userGroup is selected or a user within a userGroup
 			addUserBtn.setOnAction(e ->
 			{
 				User tempUser = new User(NamePrompt.display());
@@ -177,6 +183,7 @@ public class AdminUI extends Application {
 				} 
 			});
 			
+			//Adds user, uses currentEntry logic to place userGroup in correct place depending on if a userGroup is selected or a user within a userGroup
 			addGroupBtn.setOnAction(e ->
 			{
 				
@@ -200,6 +207,7 @@ public class AdminUI extends Application {
 				}
 			});
 			
+			//Calls userView panel for selected user
 			userViewBtn.setOnAction(e ->{
 				if(currentEntry.getValue() instanceof User)
 				{
@@ -216,7 +224,7 @@ public class AdminUI extends Application {
 		}
 	}
 	
-	
+	//Method to make display branch in AdminUI
 	private TreeItem<Entry> makeBranch(Entry entry, TreeItem<Entry> parent)
 	{
 		TreeItem<Entry> item = new TreeItem<>(entry);

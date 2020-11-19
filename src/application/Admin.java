@@ -3,11 +3,11 @@ import java.util.*;
 
 
 public class Admin {
-	//Singleton Pattern
-	
+	//Singleton Pattern 
 	private static Admin pointer;
 	public static HashSet<Entry> entryList; 
 	
+	//getInstance ensures only one instance of Admin can exist
 	public static Admin getInstance() {
 
 		if (pointer == null) {
@@ -34,7 +34,8 @@ public class Admin {
 	{
 		return entryList;
 	}
-
+	
+	//Searches for Entry by ID, iterates through UserGroup when necessary
 	public Entry getEntry(int ID)
 	{
 		Entry output = null;

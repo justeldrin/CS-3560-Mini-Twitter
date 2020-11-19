@@ -1,5 +1,6 @@
 package application;
 
+//Visitor interface entryVisitor
 public interface EntryVisitor {
 
 	int visit(User user);

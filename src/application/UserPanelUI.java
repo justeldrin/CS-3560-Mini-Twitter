@@ -12,10 +12,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+//User Panel view
 public class UserPanelUI {
 	
 	public void display(User user) {
-		
+			//UI SetupBegin
 			Stage window = new Stage();
 			Label userID = new Label("User ID: " + user.getID());
 			Button followBtn = new Button("Follow User");
@@ -50,7 +51,9 @@ public class UserPanelUI {
 			window.setTitle("User Panel: " + user);
 			window.setScene(scene);
 			window.show();
+			//UI Setup End
 			
+			//Follow Button takes in ID, and attaches given user to user's observers and updates followingView
 			followBtn.setOnAction(e ->
 			{
 				User tempUser = (User) Admin.getInstance().getEntry(FollowPrompt.display());
@@ -58,6 +61,7 @@ public class UserPanelUI {
 				followingView.getItems().add(tempUser);
 			});
 			
+			//Post Button submits tweet in textfield and calls makeTweet
 			postBtn.setOnAction(e -> 
 			{				
 				user.makeTweet(tweetPrompt.getText());

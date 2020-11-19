@@ -10,10 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+//Window that opens up to prompt users to follow another user through given ID
 public class FollowPrompt {
 	
 	private static String output;
 	
+	//Displays prompt and outputs the inputted ID
 	public static int display()
 	{
 		Stage window = new Stage();
