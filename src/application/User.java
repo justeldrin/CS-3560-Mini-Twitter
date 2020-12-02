@@ -1,12 +1,13 @@
 package application;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class User extends Subject implements Observer {
 	
+	private long lastUpdateTime;
 	private String currentTweet = "";
 	private UserPanelUI userPanel = new UserPanelUI();	
 	//User Tweet Collection collects user's own tweets
@@ -22,18 +23,27 @@ public class User extends Subject implements Observer {
 	{
 		ID = generateID();
 		entryName = "Average Joe";
+		creationTime = System.currentTimeMillis();
+		lastUpdateTime = creationTime;
 	}
 	
 	protected User(String name)
 	{
 		ID = generateID();
 		entryName = name;
+		creationTime = System.currentTimeMillis();
+		lastUpdateTime = creationTime;
+
+
 	}
 	
 	protected User(User user)
 	{
 		this.ID = user.getID();
 		this.entryName = user.getName();
+		creationTime = System.currentTimeMillis();
+		lastUpdateTime = creationTime;
+
 	}
 	//End Constructors
 	
@@ -43,6 +53,8 @@ public class User extends Subject implements Observer {
 		currentTweet = tweet;
 		tweetFeed.add(this + ": " + currentTweet);
 		this.userTweetcollection.add(currentTweet);
+		this.lastUpdateTime = System.currentTimeMillis();
+		System.out.println(this + "'s last updated time is: " + new Date(lastUpdateTime));
 		notifyObservers(this);
 	}
 	
@@ -57,6 +69,8 @@ public class User extends Subject implements Observer {
 	public void update(User user) 
 	{
 		this.tweetFeed.add(user + ": " + user.getCurrentTweet());
+		this.lastUpdateTime = System.currentTimeMillis();
+		System.out.println(this + "'s last updated time is: " + new Date(lastUpdateTime));
 	}
 	
 	///Visitor pattern accepts any EntryVisitor
@@ -78,6 +92,11 @@ public class User extends Subject implements Observer {
 	public void getPanel()
 	{
 		userPanel.display(this);
+	}
+	
+	public long getLastUpdateTime()
+	{
+		return lastUpdateTime;
 	}
 
 	public ObservableList<String> getTweets()

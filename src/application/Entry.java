@@ -6,6 +6,7 @@ import java.util.Random;
 public abstract class Entry {
 	int ID;
 	String entryName;
+	long creationTime;
 	
 	//Generate random ID method
 	protected int generateID()
@@ -60,5 +61,10 @@ public abstract class Entry {
 	public String toString()
 	{
 		return entryName;
+	}
+	
+	public long getCreationTime()
+	{
+		return creationTime;
 	}
 }

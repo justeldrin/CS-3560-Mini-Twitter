@@ -5,7 +5,7 @@ import java.util.*;
 public class Admin {
 	//Singleton Pattern 
 	private static Admin pointer;
-	public static HashSet<Entry> entryList; 
+	private static HashSet<Entry> entryList; 
 	
 	//getInstance ensures only one instance of Admin can exist
 	public static Admin getInstance() {
@@ -66,10 +66,4 @@ public class Admin {
 		}
 		return output;
 	}
-	
-	
-	
-	
-	
-	
 }

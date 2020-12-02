@@ -1,4 +1,7 @@
 package application;
+import java.util.Date;
+import java.util.Iterator;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -48,13 +51,15 @@ public class AdminUI extends Application {
 			Button messageTotalBtn = new Button("Show Messages Total");
 			Button groupTotalBtn = new Button("Show Group Total");
 			Button positiveBtn = new Button("Show Positive Percentage");
+			Button lastUpdateBtn = new Button("Show Last Updated User");
 			userTotalBtn.setMinWidth(150);
 			messageTotalBtn.setMinWidth(150);
 			groupTotalBtn.setMinWidth(150);
 			positiveBtn.setMinWidth(150);
+			lastUpdateBtn.setMinWidth(150);
 
 			VBox botCollectiontextA = new VBox(userTotalBtn, messageTotalBtn);
-			VBox botCollectiontextB = new VBox(groupTotalBtn, positiveBtn);
+			VBox botCollectiontextB = new VBox(groupTotalBtn, positiveBtn, lastUpdateBtn);
 			HBox botCollection = new HBox(botCollectiontextA, botCollectiontextB);
 			VBox uiCollection = new VBox(20, topCollection, midCollection, botCollection);
 			
@@ -70,7 +75,7 @@ public class AdminUI extends Application {
 			root.setPadding(new Insets(20));
 			root.setLeft(treeCollection);
 			root.setRight(uiCollection);
-			Scene scene = new Scene(root,700,250);
+			Scene scene = new Scene(root,700,300);
 			
 			
 			
@@ -149,6 +154,24 @@ public class AdminUI extends Application {
 				infoText.setText("Percentage of Positive Messages: " + Math.round(counter/messageTotal*100) + "%");
 			});
 			
+			//Calls lastupdate Visitor and logs last updated visitor
+			lastUpdateBtn.setOnAction(e ->{
+				int ID = -1;
+				for(Entry entry: Admin.getInstance().getEntryList())
+				{
+					ID = entry.accept(new updateTimeVisitor());
+				}
+				if(ID == -1)
+				{
+					System.out.println("No entrys inputted");
+				}
+				else
+				{	
+					System.out.println("The last updated users ID is: " + ID);
+				}
+			});
+			
+			
 			//Adds user, uses currentEntry logic to place user in correct place depending on if a userGroup is selected or a user within a userGroup
 			addUserBtn.setOnAction(e ->
 			{
@@ -212,6 +235,7 @@ public class AdminUI extends Application {
 				if(currentEntry.getValue() instanceof User)
 				{
 					User tempUser = (User) currentEntry.getValue();
+					System.out.println(tempUser + "'s creation time: " + new Date(tempUser.getCreationTime()));
 					tempUser.getPanel();
 				}
 			});

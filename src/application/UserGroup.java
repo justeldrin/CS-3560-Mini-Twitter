@@ -9,12 +9,17 @@ public class UserGroup extends Entry{
 	{
 		ID = generateID();
 		entryName = "Cool People";
+		creationTime = System.currentTimeMillis();
+		System.out.println(this + "'s creation time is : " + new Date(creationTime));
 	}
 	
 	protected UserGroup(String name)
 	{
 		ID = generateID();
 		entryName = name;
+		creationTime = System.currentTimeMillis();
+		System.out.println(this + "'s creation time is : " + new Date(creationTime));
+
 	}
 	
 	protected void addUser(User inputUser)
